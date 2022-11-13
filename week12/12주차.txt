@@ -1,0 +1,71 @@
+시험 출제:
+1. 테이블을 주면 코드로 변환하는 문제
+
+2. 파라미터 수 ( W + b )
+
+CNN: 영상처리에 주로 쓰임
+-> 가중치 업데이트 횟수도 줄어들고
+-> 의미 있는 부분만 분석할 수 있다.
+
+
+openCV는 BGR 순서로 되어 있다.
+
+
+Convolution:
+주변 화소 값들에 가중치를 곱해 더한 후
+-> 새호운 화소 값으로 만들어 준다.
+
+커널:
+-> 가중치에 곱해지는 값.
+-> 각 화소의 영향력
+-> 3x3 커널 등으로 표현됨.
+-> 커널의 크기에 따라서 input과 output의 크기 차이가 발생함.
+ex)
+kernal1 = np.ones((3, 3), dtype=np.float64)/9) # 1/9
+cv2.filter2D(gimg, -1, kernal1)
+
+-> 커널을 이용하면 의미가 없는 가장자리 픽셀은 사라진다.
+
+-> 가장자리가 사라지는 게 싫다면 ( 평균 값을 넣거나, 원래 값을 그대로 넣는다. )
+
+CONV -> Convolution layer
+POOL -> Pooling layer
+FC -> Fully Connected Layer, Densley, Dens Layer
+
+CNN 결과:
+ReLU(WX + b)
+
+feature map:
+-1 -1 -1
+-1  8 -1
+-1 -1 -1
+-> 가운데 점과 나머지 점이 얼마나 다른가.
+
+
+filter:
+미리 정해진 것이 아니고 학습되는 것이다.
+
+stride:
+보폭이라고 부르며, 커널을 적용시키고 이동하는 거리라고 생각하면 된다.
+
+padding:
+가장 자리에 filter가 적용될 수 없는 경우의 임의의 픽셀을 채워주는 기법
+-> 평균, 1, 0, ... 등의 여러 방법을 쓴다.
+
+
+padding methodology:
+1. valid:
+	이미지 내에서만 커널이 움직이는 방법
+2. same:
+	vaild 이후에 부족한 out pixel을 채워주는 것
+
+
+input -> kernal(filter) -> feature map (per kernal)(output)
+convolution == filtering
+
+
+tf.keras.layers.Conv2D(filters, kernal_size, stride(1, 1), activation, input_shape, padding)
+
+histogram equalization ( 전체적인 이미지를 도드라지게 보이게 한다. )
+https://3months.tistory.com/405
+-> 검은 고양이
